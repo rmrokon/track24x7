@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Box, Tab, Tabs, Toolbar, Typography, Button, useMediaQuery, useTheme } from '@mui/material';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import MobileMenu from './MobileMenu';
-const pages = ["Home", "About Us", "Contact Us"];
-
+import { Link } from 'react-router-dom';
 
 export default function Header() {
     const [value, setvalue] = useState(0);
@@ -12,7 +11,7 @@ export default function Header() {
 
     return (
         <Box>
-            <AppBar sx={{ background: "#FF4500" }}>
+            <AppBar position='static' sx={{ background: "#e16404" }}>
                 <Toolbar>
 
                     {
@@ -31,16 +30,17 @@ export default function Header() {
                                     value={value}
                                     indicatorColor="primary"
                                     onChange={(e, value) => setvalue(value)}>
-                                    {
-                                        pages.map((page, index) => (
-                                            <Tab key={index} label={page} />
-                                        ))
-                                    }
+
+                                    <Tab component={Link} to="/home" label="Home" />
+                                    <Tab component={Link} to="/about" label="About Us" />
+                                    <Tab component={Link} to="/contact" label="Contact Us" />
+
+
                                 </Tabs>
 
-                                <Button variant="contained">Buy Now</Button>
-                                <Button sx={{ marginLeft: "auto" }} variant="contained">Login</Button>
-                                <Button sx={{ marginLeft: "10px" }} variant="contained">Sign Up</Button></>)
+                                <Button LinkComponent={Link} to="/login" sx={{ marginLeft: "auto" }} variant="contained">Login</Button>
+
+                                <Button LinkComponent={Link} to="/signup" sx={{ marginLeft: "10px" }} variant="contained">Sign Up</Button></>)
                     }
 
                 </Toolbar>
