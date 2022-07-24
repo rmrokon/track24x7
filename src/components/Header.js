@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { AppBar, Box, Tab, Tabs, Toolbar, Typography, Button, useMediaQuery, useTheme } from '@mui/material';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import MobileMenu from './MobileMenu';
+const pages = ["Home", "About Us", "Contact Us"];
 
 
 export default function Header() {
     const [value, setvalue] = useState(0);
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+
     return (
         <Box>
             <AppBar sx={{ background: "#FF4500" }}>
@@ -23,14 +25,17 @@ export default function Header() {
                             : (<>
                                 <TimelineIcon sx={{ fontSize: "48px" }}></TimelineIcon>
                                 <Typography sx={{ fontSize: "48px" }}>track24x7</Typography>
+
                                 <Tabs
                                     textColor="white"
                                     value={value}
                                     indicatorColor="primary"
                                     onChange={(e, value) => setvalue(value)}>
-                                    <Tab label="Home" />
-                                    <Tab label="About Us" />
-                                    <Tab label="Contact Us" />
+                                    {
+                                        pages.map((page, index) => (
+                                            <Tab key={index} label={page} />
+                                        ))
+                                    }
                                 </Tabs>
 
                                 <Button variant="contained">Buy Now</Button>
