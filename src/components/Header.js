@@ -17,7 +17,7 @@ const mobileNavBarStyles = {
 }
 
 export default function Header() {
-    const [value, setvalue] = useState(0);
+    const [value, setValue] = useState(0);
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
     const [user] = useAuthState(auth);
@@ -57,8 +57,8 @@ export default function Header() {
             <Tabs
                 textColor="white"
                 value={value}
-                indicatorColor="white"
-                onChange={(e, value) => setvalue(value)}>
+                indicatorColor="secondary"
+                onChange={(e, value) => setValue(value)}>
 
                 <Tab component={Link} to="/home" label="Home" />
                 <Tab component={Link} to="/about" label="About Us" />
@@ -74,7 +74,9 @@ export default function Header() {
                     <Button LinkComponent={Link} to="/login" sx={{ marginLeft: "auto" }} variant="outlined" color="inherit">Login</Button>
             }
 
-            <Button LinkComponent={Link} to="/signup" sx={{ marginLeft: "10px" }} variant="outlined" color="inherit">Sign Up</Button></>)
+            {
+                !user && <Button LinkComponent={Link} to="/signup" sx={{ marginLeft: "10px" }} variant="outlined" color="inherit">Sign Up</Button>
+            }</>)
 
 
     return (

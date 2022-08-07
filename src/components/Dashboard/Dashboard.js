@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const outletStyle = {
     width: '100%',
+    // backgroundColor: 'gray',
 }
 
 const drawerWidth = 240;
@@ -18,7 +19,7 @@ const drawerWidth = 240;
 function Dashboard() {
     const drawerOpen = useSelector(state => state.drawerOpen);
     const dispatch = useDispatch();
-    const [value, setvalue] = useState(0);
+    const [value, setValue] = useState(0);
 
     return (
         <Box>
@@ -41,9 +42,9 @@ function Dashboard() {
                         <Tabs
                             textColor="white"
                             value={value}
-                            indicatorColor="white"
+                            indicatorColor="primary"
                             orientation='vertical'
-                            onChange={(e, value) => setvalue(value)}>
+                            onChange={(e, value) => setValue(value)}>
 
                             <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
                             <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
@@ -56,16 +57,16 @@ function Dashboard() {
                         variant="permanent"
                         sx={{
                             display: { xs: 'none', sm: 'block' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '13vh' },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '11vh', backgroundColor: 'orangered' },
                         }}
                         open
                     >
                         <Tabs
                             textColor="white"
                             value={value}
-                            indicatorColor="white"
+                            indicatorColor="primary"
                             orientation='vertical'
-                            onChange={(e, value) => setvalue(value)}>
+                            onChange={(e, value) => setValue(value)}>
 
                             <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
                             <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
