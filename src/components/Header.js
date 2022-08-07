@@ -27,7 +27,6 @@ export default function Header() {
                         isMatch ? (<>
                             <MobileMenu></MobileMenu>
                             <TimelineIcon sx={{ fontSize: "48px" }}></TimelineIcon>
-                            <Typography sx={{ fontSize: "24px" }}>track24x7</Typography>
                         </>
                         )
                             : (<>
