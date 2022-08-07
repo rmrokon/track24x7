@@ -6,7 +6,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import { signOut } from 'firebase/auth';
 
-const pages = ["Home", "About Us", "Contact Us"];
+
+const pages = ["Home", "About Us", "Contact Us", "dashboard"];
+
+
 
 export default function MobileMenu() {
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -22,6 +25,7 @@ export default function MobileMenu() {
 
     return (
         <Box>
+
             <Drawer open={openDrawer}
                 onClose={() => setOpenDrawer(false)}
             >
@@ -50,5 +54,7 @@ export default function MobileMenu() {
             <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
                 <MenuIcon sx={{ color: "white" }} />
             </IconButton>
+
+
         </Box>)
 }

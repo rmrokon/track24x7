@@ -1,20 +1,12 @@
-import { Grid, Typography, Paper, Drawer, IconButton, Box, Tabs, Tab } from '@mui/material'
+import { Drawer, Box, Tabs, Tab } from '@mui/material'
 import React, { useState } from 'react';
 import { Link as RouterLink, Outlet } from "react-router-dom";
-import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
+
 import { toggleDrawer } from '../../redux';
-import { connect } from 'react-redux';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 
-
-// const dashboardMenuStyles = {
-//     padding: "50px",
-//     height: "70vh",
-//     width: "280px",
-//     margin: "40px auto",
-//     backgroundColor: "cyan"
-// };
 
 const outletStyle = {
     width: '100%',
@@ -30,15 +22,6 @@ function Dashboard() {
 
     return (
         <Box>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={() => dispatch(toggleDrawer())}
-                sx={{ mr: 2, display: { sm: 'none', float: 'right' } }}
-            >
-                <ExitToAppTwoToneIcon />
-            </IconButton>
             <Box display={'flex'}>
 
                 <Box sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
@@ -100,18 +83,5 @@ function Dashboard() {
         </Box>
     )
 };
-
-// const mapStateToProps = state => {
-//     return {
-//         drawerOpen: state.drawerOpen
-//     }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         toggleDrawer: () => dispatch(toggleDrawer())
-//     }
-// }
-// In this method we need to use the connect method to send the mapStateToProps and mapDispatchToProps as props of Dashboard component.
 
 export default Dashboard;
