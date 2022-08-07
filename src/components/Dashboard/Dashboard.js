@@ -1,5 +1,5 @@
-import { Grid, Typography, Paper, Drawer, IconButton, Box } from '@mui/material'
-import React from 'react';
+import { Grid, Typography, Paper, Drawer, IconButton, Box, Tabs, Tab } from '@mui/material'
+import React, { useState } from 'react';
 import { Link as RouterLink, Outlet } from "react-router-dom";
 import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
 import { toggleDrawer } from '../../redux';
@@ -25,7 +25,8 @@ const drawerWidth = 240;
 
 function Dashboard() {
     const drawerOpen = useSelector(state => state.drawerOpen);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const [value, setvalue] = useState(0);
 
     return (
         <Box>
@@ -54,11 +55,18 @@ function Dashboard() {
                             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                         }}
                     >
-                        <ul>
-                            <li><RouterLink to='/dashboard/addClient'>Add New Client</RouterLink></li>
-                            <li><RouterLink to='/dashboard/issues'>Issues</RouterLink></li>
-                            <li><RouterLink to='/dashboard/reports'>Reports</RouterLink></li>
-                        </ul>
+                        <Tabs
+                            textColor="white"
+                            value={value}
+                            indicatorColor="white"
+                            orientation='vertical'
+                            onChange={(e, value) => setvalue(value)}>
+
+                            <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
+                            <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
+                            <Tab component={RouterLink} to="/dashboard/reports" label="Reports" />
+                            <Tab component={RouterLink} to="/dashboard/addIssue" label="Add Issue" />
+                        </Tabs>
 
                     </Drawer>
                     <Drawer
@@ -69,11 +77,18 @@ function Dashboard() {
                         }}
                         open
                     >
-                        <ul>
-                            <li><RouterLink to='/dashboard/addClient'>Add New Client</RouterLink></li>
-                            <li><RouterLink to='/dashboard/issues'>Issues</RouterLink></li>
-                            <li><RouterLink to='/dashboard/reports'>Reports</RouterLink></li>
-                        </ul>
+                        <Tabs
+                            textColor="white"
+                            value={value}
+                            indicatorColor="white"
+                            orientation='vertical'
+                            onChange={(e, value) => setvalue(value)}>
+
+                            <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
+                            <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
+                            <Tab component={RouterLink} to="/dashboard/reports" label="Reports" />
+                            <Tab component={RouterLink} to="/dashboard/addIssue" label="Add Issue" />
+                        </Tabs>
                     </Drawer>
                 </Box>
 
