@@ -44,8 +44,6 @@ export default function Header() {
                                     <Tab component={Link} to="/about" label="About Us" />
                                     <Tab component={Link} to="/contact" label="Contact Us" />
                                     <Tab component={Link} to="/dashboard" label="Dashboard" />
-
-
                                 </Tabs>
 
                                 {
@@ -55,8 +53,6 @@ export default function Header() {
 
                                         <Button LinkComponent={Link} to="/login" sx={{ marginLeft: "auto" }} variant="outlined" color="inherit">Login</Button>
                                 }
-
-
 
                                 <Button LinkComponent={Link} to="/signup" sx={{ marginLeft: "10px" }} variant="outlined" color="inherit">Sign Up</Button></>)
                     }

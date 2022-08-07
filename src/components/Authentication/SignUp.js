@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Paper, TextField, Button, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from "react-router-dom";
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import auth from '../firebase.init';
+import auth from '../../firebase.init';
 import { useNavigate } from 'react-router-dom';
 
 

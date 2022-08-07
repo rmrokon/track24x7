@@ -2,9 +2,9 @@ import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@mui/m
 import { deepOrange } from '@mui/material/colors'
 import React from 'react'
 import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import auth from '../firebase.init';
+import auth from '../../firebase.init';
 import { useNavigate } from "react-router-dom";
 
 const paperStyle = {
@@ -27,6 +27,8 @@ export default function Login() {
     ] = useSignInWithEmailAndPassword(auth);
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -42,7 +44,7 @@ export default function Login() {
     }
 
     if (user) {
-        navigate("/home");
+        navigate(from, { replace: true });
     }
 
 
