@@ -71,7 +71,7 @@ function Dashboard() {
                             <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
                             <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
                             <Tab component={RouterLink} to="/dashboard/reports" label="Reports" />
-                            <Tab component={RouterLink} to="/dashboard/addIssue" label="Add Issue" />
+                            <Tab component={RouterLink} to="/dashboard/createTicket" label="Add Issue" />
                         </Tabs>
                     </Drawer>
                 </Box>

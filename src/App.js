@@ -13,7 +13,7 @@ import store from './redux/store';
 import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
 import RequireAuth from "./components/Authentication/RequireAuth";
-import AddIssue from "./components/Dashboard/AddIssue";
+import CreateTicket from "./components/Dashboard/CreateTicket";
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
               <Route path="issues" element={<Issues></Issues>}></Route>
               <Route path="addClient" index element={<AddClient></AddClient>}></Route>
               <Route path="reports" element={<Reports></Reports>}></Route>
-              <Route path="addIssue" element={<AddIssue></AddIssue>}></Route>
+              <Route path="createTicket" element={<CreateTicket />}></Route>
             </Route>
 
 
