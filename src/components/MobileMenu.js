@@ -38,7 +38,7 @@ export default function MobileMenu() {
                                 key={index}
                                 textColor="white"
                                 value={value}
-                                indicatorColor="white"
+                                indicatorColor="primary"
                                 onChange={(e, value) => setvalue(value)}
                             >
 

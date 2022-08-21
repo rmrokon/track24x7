@@ -1,9 +1,7 @@
 import { Drawer, Box, Tabs, Tab } from '@mui/material'
 import React, { useState } from 'react';
 import { Link as RouterLink, Outlet } from "react-router-dom";
-
 import { toggleDrawer } from '../../redux';
-
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -14,11 +12,22 @@ const outletStyle = {
 
 const drawerWidth = 240;
 
+const dashboardMenuItems = [
+    "Add Client", "Issues", "Reports", "Create Ticket", "Clients"
+];
+
 
 function Dashboard() {
     const drawerOpen = useSelector(state => state.drawer.drawerOpen);
     const dispatch = useDispatch();
     const [value, setValue] = useState(0);
+
+    const dashboardMenu = dashboardMenuItems.map((page, index) =>
+        <Tab
+            onClick={() => dispatch(toggleDrawer())}
+            key={index} component={RouterLink}
+            to={`/dashboard/${page.split(' ').join('-')}`}
+            label={`${page}`} />);
 
     return (
         <Box>
@@ -45,10 +54,8 @@ function Dashboard() {
                             orientation='vertical'
                             onChange={(e, value) => setValue(value)}>
 
-                            <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
-                            <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
-                            <Tab component={RouterLink} to="/dashboard/reports" label="Reports" />
-                            <Tab component={RouterLink} to="/dashboard/addIssue" label="Add Issue" />
+                            {dashboardMenu}
+
                         </Tabs>
 
                     </Drawer>
@@ -67,10 +74,8 @@ function Dashboard() {
                             orientation='vertical'
                             onChange={(e, value) => setValue(value)}>
 
-                            <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
-                            <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
-                            <Tab component={RouterLink} to="/dashboard/reports" label="Reports" />
-                            <Tab component={RouterLink} to="/dashboard/createTicket" label="Create Ticket" />
+                            {dashboardMenu}
+
                         </Tabs>
                     </Drawer>
                 </Box>

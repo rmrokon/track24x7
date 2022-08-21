@@ -1,4 +1,7 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
+import { useRef } from 'react';
+import { connect } from 'react-redux';
+import { addNewClient } from '../../redux';
 
 
 const marginYsmall = {
@@ -11,15 +14,23 @@ const addClientParentBoxStyles = {
 
 }
 
-export default function AddClient() {
+function AddClient({ addNewClient, status }) {
+    const formRef = useRef();
 
-    const handleAddNewClient = () => {
-
+    const handleAddNewClient = (e) => {
+        e.preventDefault();
+        const client = {
+            clientName: e.target.client.value,
+            monthlyBill: e.target.bill.value,
+            address: e.target.address.value
+        }
+        addNewClient(client);
+        formRef.current.reset();
     }
     return (
         <Box sx={addClientParentBoxStyles}>
             <Typography variant='h3'>Add New Client</Typography>
-            <form onSubmit={handleAddNewClient}>
+            <form onSubmit={handleAddNewClient} ref={formRef}>
 
                 <TextField
                     style={marginYsmall}
@@ -63,3 +74,18 @@ export default function AddClient() {
         </Box>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        status: state.status
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewClient: (client) => dispatch(addNewClient(client))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddClient);

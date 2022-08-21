@@ -14,6 +14,7 @@ import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
 import RequireAuth from "./components/Authentication/RequireAuth";
 import CreateTicket from "./components/Dashboard/CreateTicket";
+import AllClients from "./components/Dashboard/AllClients";
 
 
 function App() {
@@ -36,9 +37,10 @@ function App() {
             </RequireAuth>}>
               <Route index element={<Issues></Issues>}></Route>
               <Route path="issues" element={<Issues></Issues>}></Route>
-              <Route path="addClient" index element={<AddClient></AddClient>}></Route>
+              <Route path="add-client" index element={<AddClient></AddClient>}></Route>
               <Route path="reports" element={<Reports></Reports>}></Route>
-              <Route path="createTicket" element={<CreateTicket />}></Route>
+              <Route path="create-ticket" element={<CreateTicket />}></Route>
+              <Route path="clients" element={<AllClients />}></Route>
             </Route>
 
 
