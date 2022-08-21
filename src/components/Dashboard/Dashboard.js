@@ -10,14 +10,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const outletStyle = {
     width: '100%',
-    // backgroundColor: 'gray',
 }
 
 const drawerWidth = 240;
 
 
 function Dashboard() {
-    const drawerOpen = useSelector(state => state.drawerOpen);
+    const drawerOpen = useSelector(state => state.drawer.drawerOpen);
     const dispatch = useDispatch();
     const [value, setValue] = useState(0);
 
@@ -71,7 +70,7 @@ function Dashboard() {
                             <Tab component={RouterLink} to="/dashboard/addClient" label="Add New Client" />
                             <Tab component={RouterLink} to="/dashboard/issues" label="Issues" />
                             <Tab component={RouterLink} to="/dashboard/reports" label="Reports" />
-                            <Tab component={RouterLink} to="/dashboard/createTicket" label="Add Issue" />
+                            <Tab component={RouterLink} to="/dashboard/createTicket" label="Create Ticket" />
                         </Tabs>
                     </Drawer>
                 </Box>

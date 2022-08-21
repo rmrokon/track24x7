@@ -7,6 +7,7 @@ import auth from '../firebase.init';
 import { signOut } from 'firebase/auth';
 
 
+
 const pages = ["Home", "About Us", "Contact Us", "dashboard"];
 
 

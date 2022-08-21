@@ -20,10 +20,45 @@ export default function AddClient() {
         <Box sx={addClientParentBoxStyles}>
             <Typography variant='h3'>Add New Client</Typography>
             <form onSubmit={handleAddNewClient}>
-                <TextField style={marginYsmall} variant="standard" type="text" label="Client Name" fullWidth required name='client'></TextField>
-                <TextField style={marginYsmall} variant="standard" type="number" label="Monthly Bill" fullWidth required name='bill'></TextField>
-                <TextField style={marginYsmall} variant="standard" type="text" label="Address" fullWidth required name='address'></TextField>
-                <Button style={{ ...marginYsmall, fontSize: "16px" }} variant="contained" type="submit" color="warning" fullWidth>Add Client</Button>
+
+                <TextField
+                    style={marginYsmall}
+                    variant="outlined"
+                    type="text"
+                    label="Client Name"
+                    name='client'
+                    fullWidth
+                    required
+                />
+
+                <TextField
+                    style={marginYsmall}
+                    variant="outlined"
+                    type="number"
+                    label="Monthly Bill"
+                    name='bill'
+                    fullWidth
+                    required
+                />
+
+                <TextField
+                    style={marginYsmall}
+                    variant="outlined"
+                    type="text"
+                    label="Address"
+                    name='address'
+                    multiline
+                    rows={3}
+                    fullWidth
+                    required
+                />
+
+                <Button
+                    style={{ ...marginYsmall, fontSize: "16px" }}
+                    variant="contained"
+                    type="submit"
+                    color="warning"
+                    fullWidth>Add Client</Button>
             </form>
         </Box>
     )
