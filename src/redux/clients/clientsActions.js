@@ -28,7 +28,7 @@ const fetchClientsFailure = error => {
 export const fetchClients = () => {
     return (dispatch) => {
         dispatch(fetchClientsRequest);
-        axios.get("https://jsonplaceholder.typicode.com/users")
+        axios.get("http://localhost:5000/getAllClients")
             .then(res => {
                 const clients = res.data;
                 dispatch(fetchClientsSuccess(clients));
