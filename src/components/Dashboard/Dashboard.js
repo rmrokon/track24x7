@@ -13,7 +13,7 @@ const outletStyle = {
 const drawerWidth = 240;
 
 const dashboardMenuItems = [
-    "Add Client", "Issues", "Reports", "Create Ticket", "Clients"
+    "Issues", "Add Client", "Reports", "Create Ticket", "Clients"
 ];
 
 
@@ -35,7 +35,6 @@ function Dashboard() {
 
                 <Box sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
                     <Drawer
-
                         variant="temporary"
                         open={drawerOpen}
                         onClose={() => dispatch(toggleDrawer())}
@@ -48,7 +47,7 @@ function Dashboard() {
                         }}
                     >
                         <Tabs
-                            textColor="white"
+                            textColor='secondary'
                             value={value}
                             indicatorColor="primary"
                             orientation='vertical'
@@ -63,12 +62,12 @@ function Dashboard() {
                         variant="permanent"
                         sx={{
                             display: { xs: 'none', sm: 'block' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '11vh', backgroundColor: 'orangered' },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '80px', bgcolor: 'primary.light' },
                         }}
                         open
                     >
                         <Tabs
-                            textColor="white"
+                            textColor='secondary'
                             value={value}
                             indicatorColor="primary"
                             orientation='vertical'

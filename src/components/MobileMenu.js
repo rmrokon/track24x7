@@ -26,36 +26,31 @@ export default function MobileMenu() {
 
     return (
         <Box>
-
             <Drawer open={openDrawer}
                 onClose={() => setOpenDrawer(false)}
             >
-                <List>
+                <Tabs
+                    textColor="secondary"
+                    value={value}
+                    indicatorColor="primary"
+                    orientation='vertical'
+                    onChange={(e, value) => setvalue(value)}
+                >
                     {
-                        pages.map((page, index) => (
+                        pages.map((page, index) => <Tab
+                            key={index}
+                            onClick={() => setOpenDrawer(false)}
+                            component={Link}
+                            to={`/${page.split(' ').join('-')}`}
+                            label={page}
 
-                            <Tabs
-                                key={index}
-                                textColor="white"
-                                value={value}
-                                indicatorColor="primary"
-                                onChange={(e, value) => setvalue(value)}
-                            >
-
-                                <Tab onClick={() => setOpenDrawer(false)} component={Link} to={`/${page}`} label={page} />
-                            </Tabs>
-                        ))
+                        />)
                     }
-
-                </List>
-
+                </Tabs>
                 {loginLogout}
-
             </Drawer>
             <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
-                <MenuIcon sx={{ color: "white" }} />
+                <MenuIcon color="primary" />
             </IconButton>
-
-
         </Box>)
 }

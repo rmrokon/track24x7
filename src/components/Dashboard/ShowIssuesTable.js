@@ -1,13 +1,16 @@
-import { Button, TableCell, TableRow } from '@mui/material';
-import { Box } from '@mui/system';
+import { Button, TableCell, TableRow, useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchTickets } from '../../redux';
 import axios from 'axios';
 import UpdateTicketModal from './UpdateTicketModal';
+import { useTheme } from '@emotion/react';
 
 function ShowIssuesTable({ ticket, fetchTickets }) {
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+    const { clientName, description, ticketId, status, _id } = ticket;
 
     const handleCloseTicket = (id) => {
 
@@ -23,30 +26,41 @@ function ShowIssuesTable({ ticket, fetchTickets }) {
             })
     }
 
-    const handleUpdateTicket = (id) => {
+    const handleUpdateTicket = () => {
         setOpen(true);
     }
 
     return (
-        <>
-            <TableRow
-                key={ticket._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-                <TableCell align="center" component="th" scope="row">
-                    {ticket.clientName}
-                </TableCell>
-                <TableCell align="center">{ticket.description}</TableCell>
-                <TableCell align="center">{ticket.ticketId}</TableCell>
-                <TableCell align="center">{ticket.status}</TableCell>
-                <TableCell align="center">
-                    <Box>
-                        <Button onClick={() => handleCloseTicket(ticket._id)} sx={{ marginLeft: "auto", marginRight: "10px" }} variant="outlined" color="secondary">Close</Button>
-                        <Button onClick={() => handleUpdateTicket(ticket._id)} sx={{ marginLeft: "auto" }} variant="outlined" color="secondary">Update</Button>
-                    </Box>
-                </TableCell>
+        <TableRow
+            key={_id}
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        >
+            <TableCell align="center" component="th" scope="row">
+                {clientName}
+            </TableCell>
+            <TableCell align="center">{description}</TableCell>
+            <TableCell align="center">{ticketId}</TableCell>
+            <TableCell align="center">{status}</TableCell>
+            <TableCell align="center">
+                <Button
+                    onClick={() => handleCloseTicket(_id)}
+                    sx={{
+                        marginLeft: "auto",
+                        marginRight: `${!isMatch ? "10px" : ""}`,
+                        marginBottom: `${isMatch ? "10px" : ""}`
+                    }}
+                    variant="outlined"
+                    color="secondary"
+                    disabled={status === "Solved" && true}
+                >Close</Button>
 
-            </TableRow>
+                <Button
+                    onClick={() => handleUpdateTicket(_id)}
+                    sx={{ marginLeft: "auto" }}
+                    variant="outlined"
+                    color="secondary">Update</Button>
+
+            </TableCell>
             <UpdateTicketModal
                 handleUpdateTicket={handleUpdateTicket}
                 open={open}
@@ -54,7 +68,7 @@ function ShowIssuesTable({ ticket, fetchTickets }) {
                 ticket={ticket}
                 fetchTickets={fetchTickets}
             />
-        </>
+        </TableRow>
     )
 }
 

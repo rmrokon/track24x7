@@ -22,13 +22,13 @@ function AllClients({ clientData, fetchClients }) {
                 <TableHead>
                     <TableRow>
                         <TableCell>Client Name</TableCell>
-                        <TableCell align="center">Address</TableCell>
-                        <TableCell align="center">Monthly Bill (BDT)</TableCell>
+                        <TableCell align="right">Address</TableCell>
+                        <TableCell align="right">Monthly Bill (BDT)</TableCell>
                         <TableCell align="center">Action</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {clientData?.clients?.map(client => <ShowClientsTable key={client._id} client={client} />)}
+                    {clientData?.clients?.map(client => <ShowClientsTable key={client._id} fetchClients={fetchClients} client={client} />)}
                 </TableBody>
             </Table>
         </TableContainer>)

@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router';
 import auth from '../../firebase.init';
 import { fetchClients, createTicket } from '../../redux';
 
@@ -23,9 +24,9 @@ const selectClientStyle = {
     width: "100%"
 };
 
-function AddIssue({ clientData, fetchClients, createTicket }) {
+function AddIssue({ clientData, fetchClients, createTicket, ticketForClient }) {
     const [user] = useAuthState(auth);
-    const [client, setClient] = useState('');
+    const [client, setClient] = useState(ticketForClient ? ticketForClient : '');
     const formRef = useRef();
 
     useEffect(() => {
@@ -100,7 +101,12 @@ function AddIssue({ clientData, fetchClients, createTicket }) {
                     name='description'
                 />
 
-                <Button style={{ ...marginYsmall, fontSize: "16px" }} variant="contained" type="submit" color="warning" fullWidth>Create Ticket</Button>
+                <Button
+                    style={{ ...marginYsmall, fontSize: "16px" }}
+                    variant="contained"
+                    type="submit"
+                    color="secondary"
+                    fullWidth>Create Ticket</Button>
             </form>
         </Box>
     )

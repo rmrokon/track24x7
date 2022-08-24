@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Tab, Tabs, Toolbar, Typography, Button, useMediaQuery, useTheme, IconButton, Grid } from '@mui/material';
+import { AppBar, Tab, Tabs, Toolbar, Typography, Button, useMediaQuery, useTheme, IconButton, Grid } from '@mui/material';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import MobileMenu from './MobileMenu';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,6 +14,7 @@ const mobileNavBarStyles = {
     width: "100%",
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center'
 }
 
 export default function Header() {
@@ -25,7 +26,7 @@ export default function Header() {
     const location = useLocation();
     const isDashboard = location.pathname.includes('dashboard');
 
-
+    const pages = ["Home", "About Us", "Contact Us", "dashboard"];
 
     const handleLogOut = () => {
         signOut(auth);
@@ -33,7 +34,7 @@ export default function Header() {
 
 
     const dashboardDrawer = isDashboard ? <IconButton
-        color="inherit"
+        color="primary"
         aria-label="open drawer"
         edge="start"
         onClick={() => dispatch(toggleDrawer())}
@@ -43,54 +44,83 @@ export default function Header() {
     </IconButton> : "";
 
     const responsiveNavBar = isMatch ? (<Grid sx={mobileNavBarStyles}>
-        <Grid display={'flex'}><MobileMenu></MobileMenu>
-            <TimelineIcon sx={{ fontSize: "48px" }}></TimelineIcon></Grid >
+        <Grid display={'flex'}>
+            <MobileMenu></MobileMenu>
+            <TimelineIcon sx={{ fontSize: "48px" }} color="primary"></TimelineIcon>
+        </Grid >
 
         <Grid>{dashboardDrawer}</Grid >
-
     </Grid >
     )
         : (<>
-            <TimelineIcon sx={{ fontSize: "48px" }}></TimelineIcon>
-            <Typography sx={{ fontSize: "48px" }}>track24x7</Typography>
+            <TimelineIcon sx={{ fontSize: "48px" }} color='primary'></TimelineIcon>
+            <Typography sx={{ fontSize: "32px", marginRight: '50px' }} color='primary'>TRACKit</Typography>
+
 
             <Tabs
-                textColor="white"
-                value={value}
-                indicatorColor="secondary"
-                onChange={(e, value) => setValue(value)}>
 
-                <Tab component={Link} to="/home" label="Home" />
-                <Tab component={Link} to="/about" label="About Us" />
-                <Tab component={Link} to="/contact" label="Contact Us" />
-                <Tab component={Link} to="/dashboard" label="Dashboard" />
+                value={value}
+                indicatorColor="primary"
+                onChange={(e, value) => setValue(value)}
+            >
+                {
+                    pages.map((page, index) => <Tab
+                        sx={{ color: "white" }}
+                        key={index}
+                        component={Link}
+                        to={`/${page.split(' ').join('-')}`}
+                        label={page}
+
+                    />)
+                }
             </Tabs>
 
             {
-                user ? <Button onClick={handleLogOut} LinkComponent={Link} to="/login" sx={{ marginLeft: "auto" }} variant="outlined" color="inherit">Logout</Button>
+                user ?
+                    <Button
+                        onClick={handleLogOut}
+                        LinkComponent={Link}
+                        to="/login"
+                        sx={{ marginLeft: "auto" }}
+                        variant="outlined"
+                        color="primary">Logout
+                    </Button>
 
                     :
 
-                    <Button LinkComponent={Link} to="/login" sx={{ marginLeft: "auto" }} variant="outlined" color="inherit">Login</Button>
+                    <Button
+                        LinkComponent={Link}
+                        to="/login"
+                        sx={{ marginLeft: "auto" }}
+                        variant="outlined"
+                        color="primary">Login
+                    </Button>
             }
 
             {
-                !user && <Button LinkComponent={Link} to="/signup" sx={{ marginLeft: "10px" }} variant="outlined" color="inherit">Sign Up</Button>
+                !user &&
+
+                <Button
+                    LinkComponent={Link}
+                    to="/signup"
+                    sx={{ marginLeft: "10px" }}
+                    variant="outlined"
+                    color="primary">Sign Up
+                </Button>
             }</>)
 
 
     return (
-        <Box>
-            <AppBar position='static' sx={{ background: "#e16404" }}>
-                <Toolbar>
 
-                    {
-                        responsiveNavBar
-                    }
+        <AppBar position='static' sx={{ bgcolor: 'secondary.dark', height: '80px' }}>
+            <Toolbar>
 
-                </Toolbar>
+                {
+                    responsiveNavBar
+                }
 
-            </AppBar>
-        </Box>
+            </Toolbar>
+        </AppBar>
+
     )
 }

@@ -15,41 +15,56 @@ import SignUp from "./components/Authentication/SignUp";
 import RequireAuth from "./components/Authentication/RequireAuth";
 import CreateTicket from "./components/Dashboard/CreateTicket";
 import AllClients from "./components/Dashboard/AllClients";
+import CreateTicketByClientName from "./components/Dashboard/CreateTicketByClientName";
+import { createTheme, colors, ThemeProvider } from '@mui/material';
 
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: colors.teal[100],
+    },
+    secondary: {
+      main: colors.teal[500],
+    }
+  }
+})
 function App() {
   return (
-    <Provider store={store}>
-      <React.Fragment>
-        <header>
-          <Header></Header>
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/about" element={<AboutUs />}></Route>
-            <Route path="/contact" element={<Contact />}></Route>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <React.Fragment>
+          <header>
+            <Header></Header>
+          </header>
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/about-us" element={<AboutUs />}></Route>
+              <Route path="/contact-us" element={<Contact />}></Route>
 
 
-            <Route path="/dashboard" element={<RequireAuth>
-              <Dashboard></Dashboard>
-            </RequireAuth>}>
-              <Route index element={<Issues></Issues>}></Route>
-              <Route path="issues" element={<Issues></Issues>}></Route>
-              <Route path="add-client" index element={<AddClient></AddClient>}></Route>
-              <Route path="reports" element={<Reports></Reports>}></Route>
-              <Route path="create-ticket" element={<CreateTicket />}></Route>
-              <Route path="clients" element={<AllClients />}></Route>
-            </Route>
+              <Route path="/dashboard" element={<RequireAuth>
+                <Dashboard></Dashboard>
+              </RequireAuth>}>
+                <Route index element={<Issues></Issues>}></Route>
+                <Route path="issues" element={<Issues></Issues>}></Route>
+                <Route path="add-client" index element={<AddClient></AddClient>}></Route>
+                <Route path="reports" element={<Reports></Reports>}></Route>
+                <Route path="create-ticket" element={<CreateTicket />}></Route>
+                <Route path="create-ticket/:ticketForClient" element={<CreateTicketByClientName />}></Route>
+                <Route path="clients" element={<AllClients />}></Route>
+              </Route>
 
 
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/signup" element={<SignUp />}></Route>
-          </Routes>
-        </main>
-      </React.Fragment>
-    </Provider>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/signup" element={<SignUp />}></Route>
+            </Routes>
+          </main>
+        </React.Fragment>
+      </Provider>
+    </ThemeProvider>
   );
 }
 

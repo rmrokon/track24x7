@@ -29,7 +29,7 @@ function AddClient({ addNewClient, status }) {
     }
     return (
         <Box sx={addClientParentBoxStyles}>
-            <Typography variant='h3'>Add New Client</Typography>
+            <Typography variant='h3' color={'secondary'}>Add New Client</Typography>
             <form onSubmit={handleAddNewClient} ref={formRef}>
 
                 <TextField
@@ -66,9 +66,9 @@ function AddClient({ addNewClient, status }) {
 
                 <Button
                     style={{ ...marginYsmall, fontSize: "16px" }}
+                    color="secondary"
                     variant="contained"
                     type="submit"
-                    color="warning"
                     fullWidth>Add Client</Button>
             </form>
         </Box>

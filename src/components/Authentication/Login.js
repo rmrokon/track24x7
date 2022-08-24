@@ -1,5 +1,4 @@
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@mui/material'
-import { deepOrange } from '@mui/material/colors'
 import React from 'react'
 import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
 import { Link as RouterLink, useLocation } from "react-router-dom";
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const paperStyle = {
     padding: "50px",
-    height: "50vh",
+    height: "auto",
     width: "280px",
     margin: "40px auto"
 };
@@ -52,9 +51,12 @@ export default function Login() {
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align="center">
-                    <Avatar sx={{ bgcolor: deepOrange[500] }}><HttpsRoundedIcon />
+                    <Avatar sx={{ bgcolor: "secondary.main" }}><HttpsRoundedIcon />
                     </Avatar>
-                    <h2 style={marginYsmall}>Login</h2>
+                    <Typography style={marginYsmall} color="secondary" fontSize={'32px'}>
+                        Login
+                    </Typography>
+
                 </Grid>
                 <form onSubmit={handleLogin}>
                     <TextField style={marginYsmall} variant="standard" type="email" label="Username" fullWidth required name='email'></TextField>
@@ -62,16 +64,15 @@ export default function Login() {
 
                     {error && <small>{error.message}</small>}
 
-                    <Button style={{ ...marginYsmall, fontSize: "16px" }} variant="contained" type="submit" color="warning" fullWidth>Login</Button>
+                    <Button style={{ ...marginYsmall, fontSize: "16px" }} variant="contained" type="submit" color="secondary" fullWidth>Login</Button>
 
                 </form>
                 <Typography>
-                    <Link href="#">Forgot Password?</Link>
-
+                    <Link color={'secondary'} href="#">Forgot Password?</Link>
                 </Typography>
                 <Typography>
                     Don't have account?
-                    <Link component={RouterLink} to="/signup" href="#">Sign Up</Link>
+                    <Link marginLeft={'4px'} color={'secondary'} component={RouterLink} to="/signup" href="#">Sign Up</Link>
                 </Typography>
             </Paper>
         </Grid>
