@@ -28,7 +28,7 @@ const addNewClientFailure = (error) => {
 export const addNewClient = (client) => {
     return (dispatch) => {
         dispatch(addNewClientReq)
-        axios.post("http://localhost:5000/addClient", client)
+        axios.post("https://trackit24x7.herokuapp.com/addClient", client)
             .then(res => {
                 dispatch(addNewClientSuccess(res.status))
             })

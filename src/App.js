@@ -51,7 +51,6 @@ function App() {
                 <Route index element={<Issues></Issues>}></Route>
                 <Route path="issues" element={<Issues></Issues>}></Route>
                 <Route path="add-client" index element={<AddClient></AddClient>}></Route>
-                <Route path="reports" element={<Reports></Reports>}></Route>
                 <Route path="create-ticket" element={<CreateTicket />}></Route>
                 <Route path="create-ticket/:ticketForClient" element={<CreateTicketByClientName />}></Route>
                 <Route path="clients" element={<AllClients />}></Route>

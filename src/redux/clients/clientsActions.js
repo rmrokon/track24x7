@@ -28,7 +28,7 @@ const fetchClientsFailure = error => {
 export const fetchClients = () => {
     return (dispatch) => {
         dispatch(fetchClientsRequest);
-        axios.get("http://localhost:5000/getAllClients")
+        axios.get("https://trackit24x7.herokuapp.com/getAllClients")
             .then(res => {
                 const clients = res.data;
                 dispatch(fetchClientsSuccess(clients));

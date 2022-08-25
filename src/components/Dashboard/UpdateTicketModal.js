@@ -36,7 +36,7 @@ export default function UpdateTicketModal({ open, setOpen, ticket, fetchTickets 
         const updatedDescription = {
             description: e.target.description.value
         };
-        axios.patch(`http://localhost:5000/updateTicket/${ticket._id}`, updatedDescription)
+        axios.patch(`https://trackit24x7.herokuapp.com/updateTicket/${ticket._id}`, updatedDescription)
             .then(res => {
                 if (res?.data?.modifiedCount === 1) {
                     alert("Ticket Updated")

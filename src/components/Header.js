@@ -26,7 +26,7 @@ export default function Header() {
     const location = useLocation();
     const isDashboard = location.pathname.includes('dashboard');
 
-    const pages = ["Home", "About Us", "Contact Us", "dashboard"];
+    const pages = ["Home", "Dashboard"];
 
     const handleLogOut = () => {
         signOut(auth);
@@ -65,7 +65,7 @@ export default function Header() {
             >
                 {
                     pages.map((page, index) => <Tab
-                        sx={{ color: "white", fontSize: "18px" }}
+                        sx={{ color: "white", fontSize: "16px" }}
                         key={index}
                         component={Link}
                         to={`/${page.split(' ').join('-')}`}
@@ -112,7 +112,7 @@ export default function Header() {
 
     return (
 
-        <AppBar position='static' sx={{ bgcolor: 'secondary.dark', height: '10vh' }}>
+        <AppBar position='fixed' sx={{ bgcolor: 'secondary.dark', height: '10vh' }}>
             <Toolbar>
 
                 {

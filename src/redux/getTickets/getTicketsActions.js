@@ -28,7 +28,7 @@ const fetchAllTicketsFailure = (error) => {
 export const fetchTickets = () => {
     return (dispatch) => {
         dispatch(fetchAllTickets);
-        axios.get("http://localhost:5000/getAllTickets")
+        axios.get("https://trackit24x7.herokuapp.com/getAllTickets")
             .then(res => {
                 dispatch(fetchAllTicketsSuccess(res.data))
             })

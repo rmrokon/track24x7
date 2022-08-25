@@ -28,7 +28,7 @@ const createTicketFailure = (error) => {
 export const createTicket = (ticket) => {
     return (dispatch) => {
         dispatch(createTicketReq)
-        axios.post("http://localhost:5000/createTicket", ticket)
+        axios.post("https://trackit24x7.herokuapp.com/createTicket", ticket)
             .then(res => {
                 console.log(res);
                 dispatch(createTicketSuccess(res.status))

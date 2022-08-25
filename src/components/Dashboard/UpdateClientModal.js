@@ -44,7 +44,7 @@ function UpdateClientModal({ open, setOpen, client, fetchClients }) {
             address
         };
         console.log(updatedClient);
-        axios.patch(`http://localhost:5000/updateClient/${client._id}`, updatedClient)
+        axios.patch(`https://trackit24x7.herokuapp.com/updateClient/${client._id}`, updatedClient)
             .then(res => {
 
                 if (res?.data?.modifiedCount === 1) {

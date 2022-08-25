@@ -14,7 +14,7 @@ function ShowIssuesTable({ ticket, fetchTickets, index }) {
 
     const handleCloseTicket = (id) => {
 
-        axios.patch(`http://localhost:5000/closeTicket/${id}`)
+        axios.patch(`https://trackit24x7.herokuapp.com/closeTicket/${id}`)
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount === 1) {

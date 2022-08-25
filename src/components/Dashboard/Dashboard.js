@@ -1,19 +1,14 @@
-import { Drawer, Box, Tabs, Tab } from '@mui/material'
+import { Drawer, Box, Tabs, Tab, Typography } from '@mui/material'
 import React, { useState } from 'react';
 import { Link as RouterLink, Outlet } from "react-router-dom";
 import { toggleDrawer } from '../../redux';
 import { useSelector, useDispatch } from 'react-redux';
 
 
-
-const outletStyle = {
-    width: '100%',
-}
-
 const drawerWidth = 240;
 
 const dashboardMenuItems = [
-    "Issues", "Add Client", "Reports", "Create Ticket", "Clients"
+    "Issues", "Add Client", "Create Ticket", "Clients"
 ];
 
 
@@ -79,8 +74,15 @@ function Dashboard() {
                     </Drawer>
                 </Box>
 
-                <Box style={outletStyle}>
+                <Box
+                    sx={{ width: "100%" }}
+                    marginTop="12vh"
+                    marginBottom="2vh"
+
+
+                >
                     <Outlet></Outlet>
+
                 </Box>
 
             </Box>
