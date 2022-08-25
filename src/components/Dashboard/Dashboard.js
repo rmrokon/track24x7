@@ -62,7 +62,7 @@ function Dashboard() {
                         variant="permanent"
                         sx={{
                             display: { xs: 'none', sm: 'block' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '80px', bgcolor: 'primary.light' },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '10vh', bgcolor: 'primary.light' },
                         }}
                         open
                     >

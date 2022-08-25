@@ -14,6 +14,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_TICKET_REQ:
             return {
+                ...state,
                 loading: true,
             }
         case CREATE_TICKET_SUCCESS:

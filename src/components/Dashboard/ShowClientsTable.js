@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import UpdateClientModal from './UpdateClientModal';
 
 
-function ShowClientsTable({ client, fetchClients }) {
+function ShowClientsTable({ client, fetchClients, index }) {
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
     const [open, setOpen] = useState(false);
@@ -20,6 +20,9 @@ function ShowClientsTable({ client, fetchClients }) {
         key={client._id}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
+        <TableCell component="th" scope="row">
+            {index + 1}
+        </TableCell>
         <TableCell component="th" scope="row">
             {clientName}
         </TableCell>

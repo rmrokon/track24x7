@@ -1,4 +1,5 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { useTheme } from '@emotion/react';
+import { Box, Button, TextField, Typography, useMediaQuery } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -6,25 +7,22 @@ import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router';
 import auth from '../../firebase.init';
 import { fetchClients, createTicket } from '../../redux';
+import Loading from '../Loading';
 
 
 const marginYsmall = {
     margin: "16px 0",
 };
 
-const addClientParentBoxStyles = {
-    width: '50%',
-    margin: '2% auto',
-};
-
 const selectClientStyle = {
     width: "100%"
 };
 
-function AddIssue({ clientData, fetchClients, createTicket, ticketForClient }) {
+function AddIssue({ clients, fetchClients, createTicket, ticketForClient, loading, status, error }) {
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
     const [user] = useAuthState(auth);
     const [client, setClient] = useState(ticketForClient ? ticketForClient : '');
     const formRef = useRef();
@@ -33,15 +31,15 @@ function AddIssue({ clientData, fetchClients, createTicket, ticketForClient }) {
         fetchClients();
     }, []);
 
-    if (clientData.loading) {
-        return <h2>Loading</h2>;
+    if (loading) {
+        return <Loading />;
     }
 
-    if (clientData.error) {
-        return <h2>{clientData.error}</h2>;
+    if (error) {
+        alert(error);
     }
 
-    const handleCreateTicket = (e) => {
+    const handleCreateTicket = async (e) => {
         e.preventDefault();
         const clientName = e.target.client.value;
         const description = e.target.description.value;
@@ -64,12 +62,17 @@ function AddIssue({ clientData, fetchClients, createTicket, ticketForClient }) {
             createdBy: user?.email
         }
         console.log(ticket);
-        createTicket(ticket);
+        await createTicket(ticket);
+        if (status === 200) {
+            alert(`Ticket: ${ticketId} Created Successfully`)
+        }
         formRef.current.reset();
     }
+
+    console.log(clients);
     return (
-        <Box sx={addClientParentBoxStyles}>
-            <Typography variant='h3'>Create A New Ticket</Typography>
+        <Box sx={{ width: `${isMatch ? "90%" : "50%"}`, margin: '2% auto' }}>
+            <Typography variant='h3' color="secondary">Create A New Ticket</Typography>
             <form onSubmit={handleCreateTicket} style={{ margin: "20px 0" }} ref={formRef}>
 
                 <InputLabel id="selectClientLabel">Select Client</InputLabel>
@@ -84,7 +87,9 @@ function AddIssue({ clientData, fetchClients, createTicket, ticketForClient }) {
                     name="client"
                     required
                 >
-                    {clientData?.clients?.map(client => <MenuItem key={client._id} value={client.clientName}>{client.clientName}</MenuItem>)}
+                    {
+                        clients?.map(client => <MenuItem key={client._id} value={client.clientName}>{client.clientName}</MenuItem>)
+                    }
 
 
                 </Select>
@@ -102,7 +107,7 @@ function AddIssue({ clientData, fetchClients, createTicket, ticketForClient }) {
                 />
 
                 <Button
-                    style={{ ...marginYsmall, fontSize: "16px" }}
+                    style={{ ...marginYsmall, fontSize: "16px", color: "white" }}
                     variant="contained"
                     type="submit"
                     color="secondary"
@@ -113,8 +118,13 @@ function AddIssue({ clientData, fetchClients, createTicket, ticketForClient }) {
 }
 
 const mapStateToProps = state => {
+    const { loading, status, error } = state.createTicket;
+    const { clients } = state.clients;
     return {
-        clientData: state.clients
+        clients,
+        loading,
+        status,
+        error
     }
 }
 

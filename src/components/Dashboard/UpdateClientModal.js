@@ -5,11 +5,12 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { InputLabel, TextField } from '@mui/material';
+import { InputLabel, TextField, useMediaQuery } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchClients } from '../../redux';
+import { useTheme } from '@emotion/react';
 
 const style = {
     position: 'absolute',
@@ -28,7 +29,8 @@ const marginYsmall = {
 };
 
 function UpdateClientModal({ open, setOpen, client, fetchClients }) {
-
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
     const handleClose = () => setOpen(false);
     const [clientName, setClientName] = useState(client.clientName);
     const [monthlyBill, setMonthlyBill] = useState(client.monthlyBill);
@@ -44,14 +46,15 @@ function UpdateClientModal({ open, setOpen, client, fetchClients }) {
         console.log(updatedClient);
         axios.patch(`http://localhost:5000/updateClient/${client._id}`, updatedClient)
             .then(res => {
-                console.log(res.data);
+
                 if (res?.data?.modifiedCount === 1) {
+                    alert("Client has been updated");
                     fetchClients();
                     setOpen(false);
                 }
             })
             .catch(error => {
-                console.log(error.message)
+                alert(error.message);
             })
     }
 
@@ -69,7 +72,7 @@ function UpdateClientModal({ open, setOpen, client, fetchClients }) {
             }}
         >
             <Fade in={open}>
-                <Box sx={style}>
+                <Box sx={{ ...style, width: `${isMatch ? "90%" : "25%"}` }}>
 
                     <form action="" onSubmit={handleUpdateClient}>
 
@@ -118,7 +121,12 @@ function UpdateClientModal({ open, setOpen, client, fetchClients }) {
                             />
                         </div>
 
-                        <Button style={{ ...marginYsmall, fontSize: "16px" }} variant="contained" type="submit" color="warning" fullWidth>Update Client</Button>
+                        <Button
+                            style={{ ...marginYsmall, fontSize: "16px", color: "white" }}
+                            variant="contained"
+                            type="submit"
+                            color="secondary"
+                            fullWidth>Update Client</Button>
                     </form>
 
                 </Box>

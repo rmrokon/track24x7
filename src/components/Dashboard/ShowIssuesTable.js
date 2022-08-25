@@ -6,7 +6,7 @@ import axios from 'axios';
 import UpdateTicketModal from './UpdateTicketModal';
 import { useTheme } from '@emotion/react';
 
-function ShowIssuesTable({ ticket, fetchTickets }) {
+function ShowIssuesTable({ ticket, fetchTickets, index }) {
     const [open, setOpen] = useState(false);
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
@@ -18,6 +18,7 @@ function ShowIssuesTable({ ticket, fetchTickets }) {
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount === 1) {
+                    alert("Ticket has been closed");
                     fetchTickets();
                 }
             })
@@ -35,6 +36,9 @@ function ShowIssuesTable({ ticket, fetchTickets }) {
             key={_id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
+            <TableCell component="th" scope="row">
+                {index + 1}
+            </TableCell>
             <TableCell align="center" component="th" scope="row">
                 {clientName}
             </TableCell>
@@ -58,7 +62,9 @@ function ShowIssuesTable({ ticket, fetchTickets }) {
                     onClick={() => handleUpdateTicket(_id)}
                     sx={{ marginLeft: "auto" }}
                     variant="outlined"
-                    color="secondary">Update</Button>
+                    color="secondary"
+                    disabled={status === "Solved" && true}
+                >Update</Button>
 
             </TableCell>
             <UpdateTicketModal

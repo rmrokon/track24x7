@@ -30,13 +30,11 @@ export const addNewClient = (client) => {
         dispatch(addNewClientReq)
         axios.post("http://localhost:5000/addClient", client)
             .then(res => {
-                console.log(res)
                 dispatch(addNewClientSuccess(res.status))
             })
             .catch(error => {
-                console.log(error);
                 const errorMsg = error.message;
-                dispatch(addNewClientFailure(errorMsg))
+                dispatch(addNewClientFailure(errorMsg));
             })
     }
 }

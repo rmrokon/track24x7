@@ -25,7 +25,7 @@ const theme = createTheme({
       main: colors.teal[100],
     },
     secondary: {
-      main: colors.teal[500],
+      main: colors.cyan[500],
     }
   }
 })

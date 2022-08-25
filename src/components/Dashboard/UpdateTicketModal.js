@@ -5,8 +5,9 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { TextField } from '@mui/material';
+import { TextField, useMediaQuery } from '@mui/material';
 import axios from 'axios';
+import { useTheme } from '@emotion/react';
 
 const style = {
     position: 'absolute',
@@ -25,6 +26,8 @@ const marginYsmall = {
 };
 
 export default function UpdateTicketModal({ open, setOpen, ticket, fetchTickets }) {
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 
     const handleClose = () => setOpen(false);
 
@@ -36,12 +39,13 @@ export default function UpdateTicketModal({ open, setOpen, ticket, fetchTickets 
         axios.patch(`http://localhost:5000/updateTicket/${ticket._id}`, updatedDescription)
             .then(res => {
                 if (res?.data?.modifiedCount === 1) {
+                    alert("Ticket Updated")
                     fetchTickets();
                     setOpen(false);
                 }
             })
             .catch(error => {
-                console.log(error.message)
+                alert(error.message);
             })
     }
 
@@ -59,7 +63,7 @@ export default function UpdateTicketModal({ open, setOpen, ticket, fetchTickets 
                 }}
             >
                 <Fade in={open}>
-                    <Box sx={style}>
+                    <Box sx={{ ...style, width: `${isMatch ? "90%" : "25%"}` }}>
                         <Typography id="UpdateTicketModal-modal-title" variant="h6" component="h2">
                             Update Ticket: {ticket?.ticketId}
                         </Typography>
@@ -78,7 +82,12 @@ export default function UpdateTicketModal({ open, setOpen, ticket, fetchTickets 
                                 required
                                 name='description'
                             />
-                            <Button style={{ ...marginYsmall, fontSize: "16px" }} variant="contained" type="submit" color="warning" fullWidth>Update Ticket</Button>
+                            <Button
+                                style={{ ...marginYsmall, fontSize: "16px", color: "white" }}
+                                variant="contained"
+                                type="submit"
+                                color="secondary"
+                                fullWidth>Update Ticket</Button>
                         </form>
 
                     </Box>

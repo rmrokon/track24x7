@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import ShowIssuesTable from './ShowIssuesTable';
 import { fetchTickets } from '../../redux';
+import Loading from '../Loading';
 
 
 function Issues({ ticketData, fetchTickets }) {
@@ -11,11 +12,11 @@ function Issues({ ticketData, fetchTickets }) {
     }, []);
 
     if (ticketData?.loading) {
-        return <h2>Loading</h2>;
+        return <Loading />;
     }
 
     if (ticketData?.error) {
-        return <h2>{ticketData?.error}</h2>;
+        alert(ticketData?.error);
     }
 
     return (
@@ -23,6 +24,7 @@ function Issues({ ticketData, fetchTickets }) {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
+                        <TableCell>No.</TableCell>
                         <TableCell align="center">Client Name</TableCell>
                         <TableCell align="center">Description</TableCell>
                         <TableCell align="center">Ticket ID</TableCell>
@@ -31,7 +33,7 @@ function Issues({ ticketData, fetchTickets }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {ticketData?.tickets?.map(ticket => <ShowIssuesTable key={ticket._id} ticket={ticket} />)}
+                    {ticketData?.tickets?.map((ticket, index) => <ShowIssuesTable key={ticket._id} ticket={ticket} index={index} />)}
                 </TableBody>
             </Table>
         </TableContainer>

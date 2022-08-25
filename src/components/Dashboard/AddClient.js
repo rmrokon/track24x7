@@ -1,7 +1,9 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { useTheme } from '@emotion/react';
+import { Box, Button, TextField, Typography, useMediaQuery } from '@mui/material';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 import { addNewClient } from '../../redux';
+import Loading from '../Loading';
 
 
 const marginYsmall = {
@@ -14,21 +16,37 @@ const addClientParentBoxStyles = {
 
 }
 
-function AddClient({ addNewClient, status }) {
+function AddClient({ addNewClient, status, loading, error }) {
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
     const formRef = useRef();
 
-    const handleAddNewClient = (e) => {
+    const handleAddNewClient = async (e) => {
         e.preventDefault();
         const client = {
             clientName: e.target.client.value,
             monthlyBill: e.target.bill.value,
             address: e.target.address.value
         }
-        addNewClient(client);
+        await addNewClient(client);
+
+        if (loading) {
+            return <Loading />
+        }
+
+        if (status === 200) {
+            alert("New Client Added");
+        }
+
+        if (error) {
+            alert(error);
+        }
         formRef.current.reset();
     }
+
+
     return (
-        <Box sx={addClientParentBoxStyles}>
+        <Box sx={{ width: `${isMatch ? "90%" : "50%"}`, margin: '2% auto' }}>
             <Typography variant='h3' color={'secondary'}>Add New Client</Typography>
             <form onSubmit={handleAddNewClient} ref={formRef}>
 
@@ -65,7 +83,7 @@ function AddClient({ addNewClient, status }) {
                 />
 
                 <Button
-                    style={{ ...marginYsmall, fontSize: "16px" }}
+                    style={{ ...marginYsmall, fontSize: "16px", color: "white" }}
                     color="secondary"
                     variant="contained"
                     type="submit"
@@ -76,8 +94,12 @@ function AddClient({ addNewClient, status }) {
 }
 
 const mapStateToProps = (state) => {
+    const { adding, status, error } = state.addClient;
+    console.log(state)
     return {
-        status: state.status
+        loading: adding,
+        status: status,
+        error: error
     };
 };
 

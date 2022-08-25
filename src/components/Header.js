@@ -65,7 +65,7 @@ export default function Header() {
             >
                 {
                     pages.map((page, index) => <Tab
-                        sx={{ color: "white" }}
+                        sx={{ color: "white", fontSize: "18px" }}
                         key={index}
                         component={Link}
                         to={`/${page.split(' ').join('-')}`}
@@ -81,7 +81,7 @@ export default function Header() {
                         onClick={handleLogOut}
                         LinkComponent={Link}
                         to="/login"
-                        sx={{ marginLeft: "auto" }}
+                        sx={{ marginLeft: "auto", fontSize: "18px" }}
                         variant="outlined"
                         color="primary">Logout
                     </Button>
@@ -91,7 +91,7 @@ export default function Header() {
                     <Button
                         LinkComponent={Link}
                         to="/login"
-                        sx={{ marginLeft: "auto" }}
+                        sx={{ marginLeft: "auto", fontSize: "18px" }}
                         variant="outlined"
                         color="primary">Login
                     </Button>
@@ -103,7 +103,7 @@ export default function Header() {
                 <Button
                     LinkComponent={Link}
                     to="/signup"
-                    sx={{ marginLeft: "10px" }}
+                    sx={{ marginLeft: "10px", fontSize: "18px" }}
                     variant="outlined"
                     color="primary">Sign Up
                 </Button>
@@ -112,7 +112,7 @@ export default function Header() {
 
     return (
 
-        <AppBar position='static' sx={{ bgcolor: 'secondary.dark', height: '80px' }}>
+        <AppBar position='static' sx={{ bgcolor: 'secondary.dark', height: '10vh' }}>
             <Toolbar>
 
                 {
