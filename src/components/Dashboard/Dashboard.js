@@ -57,7 +57,7 @@ function Dashboard() {
                         variant="permanent"
                         sx={{
                             display: { xs: 'none', sm: 'block' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '10vh', bgcolor: 'primary.light' },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, marginTop: '10vh', bgcolor: 'primary.light', position: "fixed" },
                         }}
                         open
                     >
@@ -76,10 +76,8 @@ function Dashboard() {
 
                 <Box
                     sx={{ width: "100%" }}
-                    marginTop="12vh"
-                    marginBottom="2vh"
-
-
+                    marginTop="11vh"
+                    marginBottom={"2vh"}
                 >
                     <Outlet></Outlet>
 
